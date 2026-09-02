@@ -1,59 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎬 Gerenciador de Filmes
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Trabalho da disciplina de Programação Web III (2º trimestre) — IFRS Campus Bento Gonçalves.
 
-## About Laravel
+Sistema web feito em **Laravel 12** para cadastrar e mostrar filmes. Ele tem duas partes:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Galeria (pública):** qualquer pessoa vê os filmes em cards, filtra por ano e por categoria,
+  busca pelo nome e clica no filme para ver os detalhes com o trailer do YouTube.
+- **Administração (com login):** cadastro, edição e exclusão de filmes, com upload da imagem da capa.
+  Cada filme guarda o usuário que fez o cadastro.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tecnologias
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.2 + Laravel 12
+- Banco de dados SQLite
+- Blade para as telas (CSS próprio, sem framework de front-end)
+- Migrations e Seeders
 
-## Learning Laravel
+## Como instalar e rodar
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```bash
+# 1. Instalar as dependências
+composer install
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# 2. Criar o arquivo .env e gerar a chave da aplicação
+cp .env.example .env
+php artisan key:generate
 
-## Laravel Sponsors
+# 3. Criar o banco (SQLite) e popular com os dados de exemplo
+php artisan migrate --seed
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# 4. Criar o link para as imagens enviadas (capas dos filmes)
+php artisan storage:link
 
-### Premium Partners
+# 5. Subir o servidor
+php artisan serve
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Depois é só abrir <http://localhost:8000>.
 
-## Contributing
+> No Windows, no lugar do `cp .env.example .env` use `copy .env.example .env`.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Para apagar tudo e começar de novo com os dados de exemplo:
 
-## Code of Conduct
+```bash
+php artisan migrate:fresh --seed
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Login de teste
 
-## Security Vulnerabilities
+| E-mail             | Senha    |
+| ------------------ | -------- |
+| admin@filmes.com   | 123456   |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Telas do sistema
 
-## License
+| Endereço                      | O que é                                        |
+| ----------------------------- | ---------------------------------------------- |
+| `/`                           | Galeria de filmes (com filtros e busca)        |
+| `/filme/{id}`                 | Detalhes do filme e trailer                    |
+| `/entrar`                     | Login da administração                         |
+| `/admin/filmes`               | Listagem dos filmes (editar e excluir)         |
+| `/admin/filmes/criar`         | Cadastro de um filme novo                      |
+| `/admin/filmes/{id}/editar`   | Edição do filme                                |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Banco de dados
+
+- **users** — usuários que podem entrar na administração
+- **categorias** — Ação, Animação, Comédia, Drama, Ficção Científica e Terror
+- **filmes** — nome, sinopse, ano, capa, link do trailer e as chaves estrangeiras
+  `categoria_id` e `user_id`
+
+Os relacionamentos das Models usam `hasMany()` (um usuário tem vários filmes, uma categoria tem
+vários filmes), `hasOne()` (o último filme cadastrado pelo usuário) e `belongsTo()` (o filme
+pertence a uma categoria e a um usuário).
+
+## Extras implementados
+
+- Busca por nome na galeria
+- Paginação na galeria e na listagem da administração
