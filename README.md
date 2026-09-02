@@ -1,83 +1,62 @@
 # Gerenciador de Filmes
 
-Trabalho da disciplina de Programação Web III (2º trimestre) — IFRS Campus Bento Gonçalves.
+Este projeto, desenvolvido por Derick Sonda, aluno do curso Técnico em Informática do IFRS –
+Campus Bento Gonçalves, é o trabalho da disciplina de Programação Web III referente ao segundo
+trimestre. Trata-se de uma aplicação web feita em PHP com o framework Laravel, que serve para
+cadastrar filmes e apresentá-los ao público em uma galeria.
 
-Sistema web feito em **Laravel 12** para cadastrar e mostrar filmes. Ele tem duas partes:
+O sistema é dividido em duas partes. A parte pública mostra os filmes em cards com a imagem da
+capa e permite filtrar por ano e por categoria, além de buscar pelo nome. Ao clicar em um filme,
+o visitante vê a página de detalhes, com a sinopse completa, a categoria, o ano e o trailer do
+YouTube exibido dentro da própria página. A parte de administração exige login e é onde os filmes
+são cadastrados, editados e excluídos, com upload da imagem da capa.
 
-- **Galeria (pública):** qualquer pessoa vê os filmes em cards, filtra por ano e por categoria,
-  busca pelo nome e clica no filme para ver os detalhes com o trailer do YouTube.
-- **Administração (com login):** cadastro, edição e exclusão de filmes, com upload da imagem da capa.
-  Cada filme guarda o usuário que fez o cadastro.
+O banco de dados foi criado com migrations e populado com seeders, e as informações ficam ligadas
+por chaves estrangeiras: cada filme pertence a uma categoria e ao usuário que o cadastrou. Esse
+usuário é gravado automaticamente a partir de quem está logado, sem campo no formulário. As
+consultas entre as tabelas são feitas pelos relacionamentos do Eloquent, usando hasMany, hasOne e
+belongsTo, o que faz o Laravel montar os joins sozinho.
 
-## Tecnologias
+## Tecnologias utilizadas
 
-- PHP 8.2 + Laravel 12
+- PHP 8.2 com Laravel 12
 - Banco de dados SQLite
-- Blade para as telas (CSS próprio, sem framework de front-end)
-- Migrations e Seeders
+- Blade para as telas, com CSS escrito à mão (sem framework de front-end)
+- Migrations e Seeders para criar e popular o banco
 
 ## Como instalar e rodar
 
+Com o PHP e o Composer instalados, execute os comandos abaixo dentro da pasta do projeto:
+
 ```bash
-# 1. Instalar as dependências
 composer install
-
-# 2. Criar o arquivo .env e gerar a chave da aplicação
-cp .env.example .env
+copy .env.example .env
 php artisan key:generate
-
-# 3. Criar o banco (SQLite) e popular com os dados de exemplo
 php artisan migrate --seed
-
-# 4. Criar o link para as imagens enviadas (capas dos filmes)
 php artisan storage:link
-
-# 5. Subir o servidor
 php artisan serve
 ```
 
-Depois é só abrir <http://localhost:8000>.
+O sistema fica disponível em http://localhost:8000. Em Linux ou macOS, troque o `copy` por `cp`.
+O comando `storage:link` só precisa ser executado uma vez e é o que faz as capas dos filmes
+aparecerem no navegador. Para apagar tudo e recomeçar com os dados de exemplo, use
+`php artisan migrate:fresh --seed`.
 
-> No Windows, no lugar do `cp .env.example .env` use `copy .env.example .env`.
+## Acesso
 
-Para apagar tudo e começar de novo com os dados de exemplo:
+Os seeders criam um usuário de teste com o e-mail admin@filmes.com e a senha 123456. Também é
+possível criar uma conta nova na tela de registro, em /registrar.
 
-```bash
-php artisan migrate:fresh --seed
-```
+## Estrutura do banco
 
-## Login de teste
+São três tabelas principais. A tabela `users` guarda quem pode entrar na administração, a tabela
+`categorias` guarda os gêneros dos filmes (Ação, Animação, Comédia, Drama, Ficção Científica e
+Terror) e a tabela `filmes` guarda nome, sinopse, ano, capa e link do trailer, junto com as chaves
+estrangeiras `categoria_id` e `user_id`. Os seeders já deixam o banco com treze filmes de exemplo,
+cada um com a sua capa e o link do trailer.
 
-| E-mail             | Senha    |
-| ------------------ | -------- |
-| admin@filmes.com   | 123456   |
+## Funcionalidades extras
 
-Também dá para criar uma conta nova em `/registrar`.
-
-## Telas do sistema
-
-| Endereço                      | O que é                                        |
-| ----------------------------- | ---------------------------------------------- |
-| `/`                           | Galeria de filmes (com filtros e busca)        |
-| `/filme/{id}`                 | Detalhes do filme e trailer                    |
-| `/entrar`                     | Login da administração                         |
-| `/registrar`                  | Criação de conta                               |
-| `/admin/filmes`               | Listagem dos filmes (editar e excluir)         |
-| `/admin/filmes/criar`         | Cadastro de um filme novo                      |
-| `/admin/filmes/{id}/editar`   | Edição do filme                                |
-
-## Banco de dados
-
-- **users** — usuários que podem entrar na administração
-- **categorias** — Ação, Animação, Comédia, Drama, Ficção Científica e Terror
-- **filmes** — nome, sinopse, ano, capa, link do trailer e as chaves estrangeiras
-  `categoria_id` e `user_id`
-
-Os relacionamentos das Models usam `hasMany()` (um usuário tem vários filmes, uma categoria tem
-vários filmes), `hasOne()` (o último filme cadastrado pelo usuário) e `belongsTo()` (o filme
-pertence a uma categoria e a um usuário).
-
-## Extras implementados
-
-- Busca por nome na galeria
-- Paginação na galeria e na listagem da administração
+Além do que foi pedido no enunciado, a galeria conta com busca pelo nome do filme e com paginação,
+que também é usada na listagem da administração. O sistema ainda permite que novos usuários criem
+a própria conta, e cada um vê na administração qual foi o último filme que cadastrou.
