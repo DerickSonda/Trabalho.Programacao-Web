@@ -1,7 +1,7 @@
 # Gerenciador de Filmes
 
-Este projeto, desenvolvido por Derick Sonda, aluno do curso Técnico em Informática do IFRS –
-Campus Bento Gonçalves, é o trabalho da disciplina de Programação Web III referente ao segundo
+Este projeto, desenvolvido por Derick Visintainer Sonda, aluno do curso Técnico em Informática do
+IFRS – Campus Bento Gonçalves, é o trabalho da disciplina de Programação Web III referente ao segundo
 trimestre. Trata-se de uma aplicação web feita em PHP com o framework Laravel, que serve para
 cadastrar filmes e apresentá-los ao público em uma galeria.
 
