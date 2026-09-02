@@ -235,7 +235,12 @@ return [
         'modality' => 'modalidade',
         'category' => 'categoria',
         'blood_type' => 'tipo sanguíneo',
-        'birth_date' => 'data de nascimento'
+        'birth_date' => 'data de nascimento',
+        // Nomes dos campos usados no sistema de filmes.
+        'categoria_id' => 'categoria',
+        'capa' => 'imagem da capa',
+        'trailer' => 'link do trailer',
+        'sinopse' => 'sinopse',
     ],
 
 ];
