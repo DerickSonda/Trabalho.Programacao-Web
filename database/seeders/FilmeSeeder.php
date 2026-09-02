@@ -83,6 +83,46 @@ class FilmeSeeder extends Seeder
                 'trailer' => 'https://www.youtube.com/watch?v=S014oGZiSdI',
                 'capa' => 'iluminado.svg',
             ],
+            [
+                'nome' => 'Esqueceram de Mim',
+                'ano' => 1990,
+                'categoria' => 'Comédia',
+                'sinopse' => 'A família McCallister viaja para Paris no Natal e esquece o pequeno Kevin em casa. Sozinho, o menino precisa se virar e ainda defender a casa de dois ladrões atrapalhados.',
+                'trailer' => 'https://www.youtube.com/watch?v=jEDaVHmw7r4',
+                'capa' => 'esqueceram-de-mim.svg',
+            ],
+            [
+                'nome' => 'Coringa',
+                'ano' => 2019,
+                'categoria' => 'Drama',
+                'sinopse' => 'Arthur Fleck é um comediante fracassado que sofre com problemas mentais e com o desprezo da cidade de Gotham. Aos poucos, ele se transforma no criminoso conhecido como Coringa.',
+                'trailer' => 'https://www.youtube.com/watch?v=zAGVQLHvwOY',
+                'capa' => 'coringa.svg',
+            ],
+            [
+                'nome' => 'Vingadores: Ultimato',
+                'ano' => 2019,
+                'categoria' => 'Ação',
+                'sinopse' => 'Depois de metade do universo desaparecer, os heróis que sobraram se unem em uma última tentativa de desfazer o estrago causado por Thanos e trazer todos de volta.',
+                'trailer' => 'https://www.youtube.com/watch?v=TcMBFSGVi1c',
+                'capa' => 'vingadores.svg',
+            ],
+            [
+                'nome' => 'Divertida Mente',
+                'ano' => 2015,
+                'categoria' => 'Animação',
+                'sinopse' => 'A história se passa dentro da cabeça de Riley, uma menina de 11 anos que se muda de cidade. Alegria, Tristeza, Raiva, Medo e Nojinho precisam trabalhar juntos para ajudá-la nessa fase difícil.',
+                'trailer' => 'https://www.youtube.com/watch?v=yRUAzGQ3nSY',
+                'capa' => 'divertida-mente.svg',
+            ],
+            [
+                'nome' => 'Parasita',
+                'ano' => 2019,
+                'categoria' => 'Drama',
+                'sinopse' => 'A família Kim é pobre e desempregada. Aos poucos, todos conseguem emprego na casa da rica família Park, escondendo que são parentes. O plano funciona até um segredo da casa vir à tona.',
+                'trailer' => 'https://www.youtube.com/watch?v=5xH0HfJHsaY',
+                'capa' => 'parasita.svg',
+            ],
         ];
 
         foreach ($filmes as $dados) {
