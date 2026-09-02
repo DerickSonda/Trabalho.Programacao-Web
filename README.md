@@ -1,4 +1,4 @@
-# 🎬 Gerenciador de Filmes
+# Gerenciador de Filmes
 
 Trabalho da disciplina de Programação Web III (2º trimestre) — IFRS Campus Bento Gonçalves.
 
