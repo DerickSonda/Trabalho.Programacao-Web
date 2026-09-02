@@ -44,8 +44,8 @@ aparecerem no navegador. Para apagar tudo e recomeçar com os dados de exemplo, 
 
 ## Acesso
 
-Os seeders criam um usuário de teste com o e-mail admin@filmes.com e a senha 123456. Também é
-possível criar uma conta nova na tela de registro, em /registrar.
+Os seeders criam o usuário derickv.sonda@gmail.com com a senha 123456, que é o dono dos filmes de
+exemplo. Também é possível criar uma conta nova na tela de registro, em /registrar.
 
 ## Estrutura do banco
 
