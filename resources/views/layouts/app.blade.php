@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 Gerenciador de Filmes</title>
+    <title>Gerenciador de Filmes</title>
     <style>
         * { box-sizing: border-box; }
 
@@ -90,7 +90,7 @@
     </style>
 </head>
 <body>
-    <h1>🎬 Gerenciador de Filmes</h1>
+    <h1>Gerenciador de Filmes</h1>
 
     <div class="menu">
         <a href="{{ route('galeria.index') }}">Galeria</a> |
@@ -112,8 +112,8 @@
 
     {{-- Mensagem de sucesso que vem do redirect dos controllers --}}
     @if (session('mensagem'))
-        <div class="mensagem">👍 {{ session('mensagem') }}</div>
-    @endif
+        <div class="mensagem">{{ session('mensagem') }}</div>
+    @endif 
 
     @yield('conteudo')
 </body>
