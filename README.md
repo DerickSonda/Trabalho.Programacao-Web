@@ -52,6 +52,8 @@ php artisan migrate:fresh --seed
 | ------------------ | -------- |
 | admin@filmes.com   | 123456   |
 
+Também dá para criar uma conta nova em `/registrar`.
+
 ## Telas do sistema
 
 | Endereço                      | O que é                                        |
@@ -59,6 +61,7 @@ php artisan migrate:fresh --seed
 | `/`                           | Galeria de filmes (com filtros e busca)        |
 | `/filme/{id}`                 | Detalhes do filme e trailer                    |
 | `/entrar`                     | Login da administração                         |
+| `/registrar`                  | Criação de conta                               |
 | `/admin/filmes`               | Listagem dos filmes (editar e excluir)         |
 | `/admin/filmes/criar`         | Cadastro de um filme novo                      |
 | `/admin/filmes/{id}/editar`   | Edição do filme                                |

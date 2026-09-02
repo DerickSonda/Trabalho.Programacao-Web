@@ -3,6 +3,7 @@
 use App\Http\Controllers\FilmeController;
 use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 
 // ---------- Parte pública (galeria de filmes) ----------
@@ -15,6 +16,10 @@ Route::get('/filme/{filme}', [GaleriaController::class, 'show'])->name('galeria.
 Route::get('/entrar', [LoginController::class, 'mostrarFormulario'])->name('login');
 Route::post('/entrar', [LoginController::class, 'entrar'])->name('entrar');
 Route::post('/sair', [LoginController::class, 'sair'])->name('sair');
+
+// ---------- Cadastro de usuário ----------
+Route::get('/registrar', [RegistroController::class, 'mostrarFormulario'])->name('registro');
+Route::post('/registrar', [RegistroController::class, 'registrar'])->name('registrar');
 
 // ---------- Administração (só entra quem está logado) ----------
 Route::prefix('/admin')->middleware('auth')->group(function () {
